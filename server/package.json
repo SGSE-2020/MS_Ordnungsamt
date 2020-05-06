@@ -1,0 +1,15 @@
+{
+  "name": "ordnungsamt",
+  "version": "1.0.0",
+  "description": "The Backend of the Ordnungsamt Microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Philipp Clausing",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "grpc": "^1.24.2"
+  }
+}
