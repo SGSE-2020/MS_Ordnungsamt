@@ -23,10 +23,10 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: europe-west1-b
   GKE_CLUSTER: smartcity
-  IMAGE_frontend: ms-MSSERVICE-frontend
-  IMAGE_backend: ms-MSSERVICE-backend
+  IMAGE_frontend: ms-ordnungsamt-frontend
+  IMAGE_backend: ms-ordnungsamt-backend
   REGISTRY_HOSTNAME: gcr.io
-  DEPLOYMENT_NAME: ms-MSSERVICE
+  DEPLOYMENT_NAME: ms-ordnungsamt
 
 jobs:
   setup-build-publish-deploy:
