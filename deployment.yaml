@@ -20,6 +20,6 @@ spec:
       - image: ms-ordnungsamt-backend
         name: ms-ordnungsamt-backend
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
       restartPolicy: Always
 status: {}
