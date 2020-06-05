@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: ms-ordnungsamt
+  name: ms-ordnungsamt
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ms-ordnungsamt
+    spec:
+      containers:
+      - image: ms-ordnungsamt-frontend
+        name: ms-ordnungsamt-frontend
+        ports:
+        - containerPort: 80
+      - image: ms-ordnungsamt-backend
+        name: ms-ordnungsamt-backend
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always
+status: {}
