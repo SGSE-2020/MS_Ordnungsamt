@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+    mongodb:
+        image: mongo
+        container_name: ms_ordnungsamt_db
+        restart: unless-stopped
+        ports:
+            - 27017:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: placeholder
+        networks:
+            - backend
+
+    ordnungsamtserver:
+        build: backend/.
+        container_name: ms_ordnungsamt_backend
+        networks:
+            - backend
+            - frontend
+
+    ordnungsamtweb:
+        build: frontend/.
+        container_name: ms_ordnungsamt_frontend
+        networks:
+            - frontend
+
+    ordnungsamtproxy:
+        build: ordnungsamt_proxy/.
+        container_name: ms_ordnungsamt_proxy
+        ports:
+            - 8080:80
+        networks:
+            - frontend
+
+networks:
+    backend:
+    frontend:
