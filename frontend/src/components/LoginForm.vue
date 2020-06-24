@@ -12,13 +12,13 @@
         </v-btn>
     </template>
     <template v-else>
-    <v-btn
-        @click="showLoginForm = true"
-        target="_blank"
-        text
-      >
-      <span class="mr-2">Anmeldung</span>
-    </v-btn>
+        <v-btn
+            @click="showLoginForm = true"
+            target="_blank"
+            text
+        >
+            <span class="mr-2">Anmeldung</span>
+        </v-btn>
     </template>
     
     <v-dialog v-model="showLoginForm" persistent max-width="600px">
@@ -31,13 +31,13 @@
         </v-alert>
         <v-card-text>
             <v-form v-model="isValid">
-                <v-text-field 
+                <v-text-field
                     label="Email" 
                     v-model="email"
                     :rules="[v => !!v || 'Email wird benötigt']"
                     required
                 ></v-text-field>
-                <v-text-field 
+                <v-text-field
                     label="Password" 
                     v-model="password"
                     type="password"
@@ -90,14 +90,14 @@ export default {
             });
       },
       signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          //this.$router.replace({
-          //  name: "publicpage"
-          //});
-        });
+        firebase
+            .auth()
+            .signOut()
+            .then(() => {
+              //this.$router.replace({
+              //  name: "publicpage"
+              //});
+            });
     }
   }
 }

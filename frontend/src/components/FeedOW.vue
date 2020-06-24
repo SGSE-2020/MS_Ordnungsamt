@@ -5,10 +5,17 @@
                 color="#BFBFBF"
                 dark
             >
-            <v-toolbar-title>Ordnungswidrigkeiten</v-toolbar-title>
+            <v-toolbar-title>Aktuelle Ordnungswidrigkeiten</v-toolbar-title>
             </v-toolbar>
-            <v-list>
-
+            <v-list dense>
+                <v-list-item
+                    v-for="(item, i) in owdata.ow"
+                    :key="i"
+                >
+                <v-list-item-content>
+                    <v-list-item-title v-text="item"></v-list-item-title>
+                </v-list-item-content>
+                </v-list-item>
             </v-list>
         </v-card>
     </div>
@@ -16,10 +23,32 @@
 
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'FeedOW',
   data: () => ({
-      
-  })
+      owdata : []
+  }),
+  methods:{
+    loadOWData(){
+        axios.get('/api/ordnungswidrigkeiten')
+        .then(response => {
+          this.owdata = response.data
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    }
+  },
+  created() {
+    this.loadOWData();
+    this.interval = setInterval(() => this.loadOWData(), 5000)
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  }
 }
+
+
 </script>
