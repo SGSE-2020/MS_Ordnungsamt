@@ -1,17 +1,27 @@
 <template>
 <div id="loginForm">
-    <v-dialog v-model="showLoginForm" persistent max-width="600px">
-    <template v-slot:activator="{ on, attrs }">
+    
+    <template v-if="user.loggedIn">
+        <span class="mr-2">{{user.data.displayName}}</span>
+        <v-btn
+            @click="signOut();"
+            target="_blank"
+            text
+        >
+            <span class="mr-2">Abmelden</span>
+        </v-btn>
+    </template>
+    <template v-else>
     <v-btn
         @click="showLoginForm = true"
         target="_blank"
         text
-        v-bind="attrs"
-        v-on="on"
       >
       <span class="mr-2">Anmeldung</span>
     </v-btn>
     </template>
+    
+    <v-dialog v-model="showLoginForm" persistent max-width="600px">
     <v-card>
         <v-card-title>
           <span class="headline">Smart City Login</span>
@@ -48,10 +58,17 @@
 <script>
 
 //External Components
+import { mapGetters } from "vuex";
 import firebase from "firebase";
 
 export default {
   name: 'LoginForm',
+  computed: {
+    ...mapGetters({
+    // map `this.user` to `this.$store.getters.user`
+      user: "user"
+    })
+  },
   data: () => ({
       showLoginForm: false,
       email : null,
@@ -71,7 +88,17 @@ export default {
             .catch( ()=> {
                 this.wrongLogin = true;
             });
-      }
+      },
+      signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          //this.$router.replace({
+          //  name: "publicpage"
+          //});
+        });
+    }
   }
 }
 </script>
