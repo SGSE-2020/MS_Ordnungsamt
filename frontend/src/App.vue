@@ -25,8 +25,8 @@
         <v-layout row> <!-- The two row split -->
           <v-flex md6> <!-- The left row -->
             <v-layout column> <!-- Vertical Layout -->
-              <FeedGN/>
-              <FeedOW/>
+              <v-flex md6><FeedGN/></v-flex>
+              <v-flex md6><FeedOW/></v-flex>
             </v-layout>
           </v-flex>
         </v-layout>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+
+//Ordnungsamt Components
 import LoginForm from './components/LoginForm';
 import FeedGN from './components/FeedGN';
 import FeedOW from './components/FeedOW';
@@ -52,6 +54,6 @@ export default {
 
   data: () => ({
     //
-  }),
+  })
 };
 </script>

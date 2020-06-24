@@ -1,7 +1,15 @@
 <template>
   <div id="feedGN">
     <v-card>
-      <v-card-title>Genehmigungen Feed</v-card-title>
+      <v-toolbar
+        color="#BFBFBF"
+        dark
+      >
+      <v-toolbar-title>Genehmigungen</v-toolbar-title>
+      </v-toolbar>
+      <v-list>
+
+      </v-list>
     </v-card>
   </div>
 </template>

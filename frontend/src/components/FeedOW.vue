@@ -1,7 +1,15 @@
 <template>
     <div id="feedOW">
         <v-card>
-            <v-card-title>Ordnungswidrigkeiten Feed</v-card-title>
+            <v-toolbar
+                color="#BFBFBF"
+                dark
+            >
+            <v-toolbar-title>Ordnungswidrigkeiten</v-toolbar-title>
+            </v-toolbar>
+            <v-list>
+
+            </v-list>
         </v-card>
     </div>
 </template>
