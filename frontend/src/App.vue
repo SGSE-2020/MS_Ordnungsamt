@@ -21,17 +21,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container>
-        <v-layout row> <!-- The two row split -->
-          <v-flex md6> <!-- The left row -->
-            <v-layout column> <!-- Vertical Layout -->
-              <v-flex md6><FeedGN/></v-flex>
-              <v-flex md6><FeedOW/></v-flex>
-            </v-layout>
-          </v-flex>
-        </v-layout>
-      </v-container>
-      
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
@@ -40,16 +30,13 @@
 
 //Ordnungsamt Components
 import LoginForm from './components/LoginForm';
-import FeedGN from './components/FeedGN';
-import FeedOW from './components/FeedOW';
+
 
 export default {
   name: 'App',
 
   components: {
-    LoginForm,
-    FeedGN,
-    FeedOW
+    LoginForm
   },
 
   data: () => ({
