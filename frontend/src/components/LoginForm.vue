@@ -4,6 +4,12 @@
     <template v-if="user.loggedIn">
         <span class="mr-2">{{user.data.displayName}}</span>
         <v-btn
+            href="/buerger"
+            text
+        >
+            <span class="mr-2">Buergerportal</span>
+        </v-btn>
+        <v-btn
             @click="signOut();"
             target="_blank"
             text
@@ -94,9 +100,9 @@ export default {
             .auth()
             .signOut()
             .then(() => {
-              //this.$router.replace({
-              //  name: "publicpage"
-              //});
+              this.$router.replace({
+                name: "publicpage"
+              });
             });
     }
   }

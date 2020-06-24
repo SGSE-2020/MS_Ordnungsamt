@@ -5,6 +5,7 @@
       color="primary"
       dark
     >
+    <router-link to="/">
       <div class="d-flex align-center">
         <v-img
           alt="Ordnungsamt Logo"
@@ -15,6 +16,7 @@
           width="200"
         />
       </div>
+    </router-link>
 
       <v-spacer></v-spacer>
       <LoginForm/>
