@@ -2,7 +2,7 @@
     <div id="feedOW">
         <v-card>
             <v-toolbar
-                color="#BFBFBF"
+                color="primary"
                 dark
             >
             <v-toolbar-title>Aktuelle Ordnungswidrigkeiten</v-toolbar-title>

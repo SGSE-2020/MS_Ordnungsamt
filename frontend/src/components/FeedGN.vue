@@ -2,7 +2,7 @@
   <div id="feedGN">
     <v-card>
       <v-toolbar
-        color="#BFBFBF"
+        color="primary"
         dark
       >
       <v-toolbar-title>Aktuelle Genehmigungen</v-toolbar-title>

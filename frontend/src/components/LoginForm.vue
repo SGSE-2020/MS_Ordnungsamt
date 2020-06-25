@@ -1,8 +1,15 @@
 <template>
 <div id="loginForm">
-    
+    <span v-if="user.loggedIn" class="mr-2">{{user.data.displayName}}</span>
     <template v-if="user.loggedIn">
-        <span class="mr-2">{{user.data.displayName}}</span>
+        <v-btn
+            href="/mitarbeiter"
+            text
+        >
+            <span class="mr-2">Mitarbeiterportal</span>
+        </v-btn>
+    </template>
+    <template v-if="user.loggedIn">
         <v-btn
             href="/buerger"
             text

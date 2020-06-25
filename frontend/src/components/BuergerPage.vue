@@ -10,7 +10,10 @@
           </v-col>
           <br>
           <v-col md="6" offset-md="1">
-            <!-- BuergerPage Content Linke Seite -->
+            <!-- BuergerPage Content Right Site -->
+            <ClaimRequest/>
+            <br>
+            <ClaimRequestOverview/>
           </v-col>
         </v-row>
       </v-container>
@@ -19,11 +22,15 @@
 <script>
 import FeedGN from './FeedGN';
 import FeedOW from './FeedOW';
+import ClaimRequest from './ClaimRequest';
+import ClaimRequestOverview from './ClaimRequestOverview'
 
 export default {
     components: {
         FeedGN,
-        FeedOW
+        FeedOW,
+        ClaimRequest,
+        ClaimRequestOverview
     },
 }
 </script>
