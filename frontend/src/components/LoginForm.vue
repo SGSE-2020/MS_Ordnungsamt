@@ -2,20 +2,24 @@
 <div id="loginForm">
     <span v-if="user.loggedIn" class="mr-2">{{user.data.displayName}}</span>
     <template v-if="user.loggedIn">
+        <router-link to="/mitarbeiter">
         <v-btn
-            href="/mitarbeiter"
+            target="_blank"
             text
         >
             <span class="mr-2">Mitarbeiterportal</span>
         </v-btn>
+        </router-link>
     </template>
     <template v-if="user.loggedIn">
+        <router-link to="/buerger">
         <v-btn
-            href="/buerger"
+            target="_blank"
             text
         >
             <span class="mr-2">Buergerportal</span>
         </v-btn>
+        </router-link>
         <v-btn
             @click="signOut();"
             target="_blank"
@@ -23,6 +27,7 @@
         >
             <span class="mr-2">Abmelden</span>
         </v-btn>
+        
     </template>
     <template v-else>
         <v-btn
