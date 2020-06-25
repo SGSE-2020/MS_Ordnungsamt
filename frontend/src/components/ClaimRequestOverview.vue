@@ -12,6 +12,7 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
+      loading loading-text="Lädt... Bitte warten"
       :headers="headers"
       :items="dataset"
       :search="search"
@@ -36,6 +37,7 @@
           { text: 'Typ', value: 'type' },
           { text: 'Status', value: 'state' },
         ],
+        dataset : []
       }
     },
   }

@@ -14,16 +14,78 @@
         Ordnungswidrigkeit
     </v-tab>
 
-    <v-tab-item>
+    <v-tab-item >
           <v-card-title>Antrag stellen</v-card-title>
+          <v-card-text>
+          <form sm="4">
+              <v-text-field
+                v-model="headline"
+                label="Überschrift"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="an_text"
+                label="Antragstext"
+                required
+              ></v-text-field>
+              <v-btn class="mr-4" @click="submit">Antrag stellen</v-btn>
+              <v-btn @click="clear">Zurücksetzen</v-btn>
+              <v-spacer></v-spacer>
+          </form>
+          </v-card-text>
     </v-tab-item>
 
     <v-tab-item>
           <v-card-title>Ordnungswidrigkeit melden</v-card-title>
+          <v-card-text>
+          <form sm="4">
+              <v-text-field
+                v-model="personOfInterest"
+                label="Beschuldigte"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="ow_text"
+                label="Tatbeschreibung"
+                required
+              ></v-text-field>
+              <v-select
+                v-model="ow_cat"
+                :items="ow_all_cat"
+                attach
+                chips
+                label="Kategorien"
+                multiple
+          ></v-select>
+              <v-btn class="mr-4" @click="submit">Ordnungswidrigkeit melden</v-btn>
+              <v-btn @click="clear">Zurücksetzen</v-btn>
+              <v-spacer></v-spacer>
+          </form>
+          </v-card-text>
     </v-tab-item>
 </v-tabs>
 </v-card>
 
 </template>
 
-<script></script>
+<script>
+
+export default {
+    data: () => ({
+        headline : '',
+        an_text : '',
+        ow_text : '',
+        personOfInterest : '',
+        ow_all_cat: ['Öffentliches Ärgernis', 'Falschparken', 'Sachbeschädigung', 'Körperverletzung'],
+    }),
+    methods:{
+        clear() {
+
+        },
+        submit() {
+
+        }
+    },
+}
+
+</script>
