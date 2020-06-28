@@ -1,6 +1,6 @@
 
 var amqp = require('amqp');
-var connection = amqp.createConnection({ host: 'ms-rabbitmq', port: 5671 });
+var connection = amqp.createConnection({ host: 'ms-rabbitmq', port: 5671, , password: 'sgseistgeil', login: 'testmanager', connectionTimeout: 10000});
 var exchange = null
 var last_error = null
 
