@@ -22,6 +22,8 @@ app.all('/*', function(req, res, next) {
     next();
 });
     
+
+module.exports  = function(amqpservice,grpcservice)  {
 /**
 * Returns if the rest server is alive
 */
@@ -35,6 +37,10 @@ app.get("/alive", function(req, res) {
     res.send(responseObj);
 });
 
+app.get('/log', function (req, res) {
+    console.log("REST CALL: /log - Log Requested")
+});
+
 app.get('/ordnungswidrigkeiten', function (req, res) {
     console.log("REST CALL: /ordnungswidrigkeiten");
     res.json({ow : [ "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++]});
@@ -45,8 +51,14 @@ app.get('/genehmigungen', function (req, res) {
     res.json({gn : [ "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++]});
 });
 
+app.get('/announcePermission', function (req, res) {
+    console.log("REST CALL: /announcePermission");
+    amqpservice.sendMessage(req);
+});
 
 //Server start
 var server = app.listen(port, function() {
     console.log('MS_Ordnungsamt is running! Port:' + port);
 });
+
+};
