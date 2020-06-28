@@ -37,8 +37,9 @@ app.get("/alive", function(req, res) {
     res.send(responseObj);
 });
 
-app.get('/log', function (req, res) {
-    console.log("REST CALL: /log - Log Requested")
+app.get('/amqplog', function (req, res) {
+    console.log("REST CALL: /log - Log Requested");
+    res.send(amqpservice.lastError());
 });
 
 app.get('/ordnungswidrigkeiten', function (req, res) {
@@ -55,6 +56,7 @@ app.get('/announcePermission', function (req, res) {
     console.log("REST CALL: /announcePermission");
     amqpservice.sendMessage(req);
 });
+
 
 //Server start
 var server = app.listen(port, function() {

@@ -2,9 +2,11 @@
 var amqp = require('amqp');
 var connection = amqp.createConnection({ host: 'ms-rabbitmq', port: 5671 });
 var exchange = null
+var last_error = null
 
 connection.on('error', function(e) {
     console.log("[AMQP-Service] ", e);
+    last_error = e;
   });
    
 
@@ -25,5 +27,8 @@ module.exports  = {
     console.log('[AMQP-Service] Called to send message: '. message);
     //TODO: Send Message
     exchange.publish('','Testmessage');
+  },
+  lastError : () => {
+    return last_error;
   }
 };
