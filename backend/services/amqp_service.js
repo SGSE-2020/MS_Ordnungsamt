@@ -20,8 +20,8 @@ function afterInit(){
 
 }
 
-module.exports  = function()  {
-  function sendMessage (message){
+module.exports  = {
+  sendMessage : (message) => {
     console.log('[AMQP-Service] Called to send message: '. message);
     //TODO: Send Message
     exchange.publish('','Testmessage');
