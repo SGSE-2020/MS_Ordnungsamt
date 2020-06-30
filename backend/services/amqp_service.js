@@ -2,7 +2,7 @@
 var amqp = require('amqp');
 
 var amqp_url = "amqp://testmanager:sgseistgeil@ms-rabbitmq:5672/";
-var amqp_url_dev = "amqp://testmanager:sgseistgeil@ms-rabbitmq:5672/";
+var amqp_url_dev = "amqp://@ms-rabbitmq:5672/";
 
 var last_error = null
 
