@@ -24,7 +24,12 @@ module.exports  = {
     });
     console.log('[AMQP-Service] Called to send message: '. message);
     //TODO: Send Message
-    connection.publish('','Testmessageblblblb');
+    connection.on('ready', function () {
+      console.log('[AMQP-Service] Connection init complete.')
+      last_error = "Connection init complete";
+      connection.publish('','Testmessageblblblb');
+    });
+    
   },
   lastError : () => {
     return last_error;
