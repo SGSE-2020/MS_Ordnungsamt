@@ -4,7 +4,7 @@ var amqp = require('amqp');
 var amqp_url = "amqp://administrator:sgse2020@ms-rabbitmq:5672/";
 var amqp_url_dev = "amqp://aelsovie:l-gjNtM4_dqaFQdB-ZAOTrGZljQmAGWq@wolverine.rmq.cloudamqp.com/aelsovie";
 
-var connection = amqp.createConnection({ url: amqp_url_dev});
+var connection = amqp.createConnection({ url: amqp_url});
 var exc = null;
 var last_error = null
 
