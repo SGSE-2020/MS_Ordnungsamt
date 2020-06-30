@@ -20,7 +20,7 @@ var last_error = null
 
 connection.on('error', function(e) {
   console.log("[AMQP-Service] ", e);
-  last_error = e;
+  last_error = "AMQP Connection error: " + e;
 });
    
 
@@ -31,7 +31,7 @@ connection.on('ready', function () {
     //console.log('Exchange ' + exc.name + ' is open');
     //last_error = "Exchange is open";
   //});
-  exc = connection.exchange('ordungsamt', {
+  exc = connection.exchange('ordnungsamt', {
     type: 'FANOUT',
     durable: true,
     autoDelete: false
