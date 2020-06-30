@@ -19,6 +19,7 @@ connection.on('ready', function () {
   last_error = "Connection init complete"
   exc = connection.exchange('ordnungsamt2',{type : 'fanout'}, function (exchange) {
     console.log('Exchange ' + exc.name + ' is open');
+    last_error = "Exchange is open";
   });
 });
 
