@@ -1,6 +1,7 @@
 
 var amqp = require('amqp');
-var connection = amqp.createConnection({ url: "amqp://ms-rabbitmq:5672/"}, {defaultExchangeName: "ordnungsamt"});
+
+
 var last_error = null
 
 connection.on('error', function(e) {
@@ -20,6 +21,7 @@ function afterInit(){
 
 module.exports  = {
   sendMessage : (message) => {
+    var connection = amqp.createConnection({ url: "amqp://testmanager:sgseistgeil@ms-rabbitmq:5672"}, {defaultExchangeName: "ordnungsamt"});
     console.log('[AMQP-Service] Called to send message: '. message);
     //TODO: Send Message
     connection.publish('','Testmessageblblblb');
