@@ -55,6 +55,7 @@ app.get('/genehmigungen', function (req, res) {
 app.get('/announcePermission', function (req, res) {
     console.log("REST CALL: /announcePermission");
     amqpservice.sendMessage("Hallo");
+    res.json({answer : "message sent"});
 });
 
 
