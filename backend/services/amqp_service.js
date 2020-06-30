@@ -1,6 +1,6 @@
 
 var amqp = require('amqp');
-var connection = amqp.createConnection({ url: "amqp://testmanager:sgseistgeil@ms-rabbitmq:5672/"}, {defaultExchangeName: "ordnungsamt"});
+var connection = amqp.createConnection({ url: "amqp://ms-rabbitmq:5672/"}, {defaultExchangeName: "ordnungsamt"});
 var last_error = null
 
 connection.on('error', function(e) {
