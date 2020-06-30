@@ -17,7 +17,7 @@ var last_error = null
 
 module.exports  = {
   sendMessage : (message) => {
-    var connection = amqp.createConnection({ url: "amqp://testmanager:sgseistgeil@ms-rabbitmq:5672"});
+    var connection = amqp.createConnection({ url: "amqp://testmanager:sgseistgeil@ms-rabbitmq:5672/"},{defaultExchangeName: "ordnungsamt"});
     connection.on('error', function(e) {
       console.log("[AMQP-Service] ", e);
       last_error = e;
