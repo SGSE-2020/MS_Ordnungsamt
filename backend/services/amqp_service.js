@@ -32,7 +32,7 @@ connection.on('ready', function () {
     //last_error = "Exchange is open";
   //});
   exc = connection.exchange('ordnungsamt', {
-    type: 'FANOUT',
+    type: 'fanout',
     durable: true,
     autoDelete: false
   }, (exchangeRes) => {
