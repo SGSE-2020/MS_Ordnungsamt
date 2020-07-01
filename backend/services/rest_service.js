@@ -39,7 +39,7 @@ app.get("/alive", function(req, res) {
 
 app.get('/amqplog', function (req, res) {
     console.log("REST CALL: /log - Log Requested");
-    res.send(amqpservice.lastError());
+    res.send(amqpservice.getLog());
 });
 
 app.get('/ordnungswidrigkeiten', function (req, res) {

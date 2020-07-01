@@ -61,7 +61,7 @@ module.exports  = {
       amqp_log.push("AMQP - Published message: " + JSON.stringify(data));
     });
   },
-  lastError : () => {
-    return amqp_log;
+  getLog : () => {
+    return JSON.stringify(amqp_log);
   }
 };
