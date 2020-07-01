@@ -19,7 +19,7 @@ var getLog = function() {
 };
 
 function verifyUserGRPC(user_token) {
-    grpcClient.verifyUser({ token: user_token }, (err, res) => {
+    grpcUserService.verifyUser({ token: user_token }, (err, res) => {
         if (res.uid) {
             //verfiy true
             return res.uid;
