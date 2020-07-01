@@ -19,6 +19,7 @@ var getLog = function() {
 };
 
 function verifyUserGRPC(user_token) {
+    grpc_log.push(user_token);
     grpcUserService.verifyUser({ token: user_token }, (err, res) => {
         if (res.uid) {
             //verfiy true
@@ -26,9 +27,8 @@ function verifyUserGRPC(user_token) {
         } else {
             //verfiy false
             grpc_log.push(res);
-            return false
+            return false;
         }
-        grpc_log.push(err);
     });    
 };
 
