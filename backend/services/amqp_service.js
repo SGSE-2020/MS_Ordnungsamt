@@ -1,5 +1,6 @@
 
 var amqp = require('amqp');
+var dbservice = require('./db_service');
 
 const connectionObj = {
   host: 'ms-rabbitmq',

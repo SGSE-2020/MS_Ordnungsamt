@@ -4,6 +4,7 @@ const path = require('path');
 const gRpcServer = new Mali();
 const GRPC_PORT = 50051;
 const PROTO_PATH = path.resolve(__dirname, '../proto/oamt.proto');
+var dbservice = require('./db_service');
 
 gRpcServer.addService(PROTO_PATH, 'OAmtService');
 

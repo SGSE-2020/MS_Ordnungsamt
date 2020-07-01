@@ -1,5 +1,6 @@
 var express = require('express')
 const bodyParser = require('body-parser');
+var dbservice = require('./db_service');
 
 var envType = process.env.NODE_ENV;
 

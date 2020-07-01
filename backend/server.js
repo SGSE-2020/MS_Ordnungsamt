@@ -1,5 +1,3 @@
-//TODO Database Stuff
-
 var amqpservice = require('./services/amqp_service')
 
 var grpcservice = require('./services/grpc_service')
