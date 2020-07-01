@@ -1,6 +1,5 @@
 
 var amqp = require('amqp');
-var grpc_caller_service = require('./grpc_caller_service')
 
 const connectionObj = {
   host: 'ms-rabbitmq',

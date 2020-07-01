@@ -1,0 +1,21 @@
+syntax = "proto3";
+package announcement;
+
+service OAmtService {
+    rpc genehmigungen(Amount) returns (Genehmigungen) {}
+    rpc ordnungswidrigkeiten(Amount) returns (Ordnungswidrigkeiten) {}
+}
+
+message Genehmigungen{
+    int32 amount = 1;
+    string genehmigungenjarray = 2;
+}
+
+message Ordnungswidrigkeiten {
+    int32 amount = 1;
+    string ordnungswidrigkeitenjarray = 2;
+}
+
+message Amount {
+    int32 amount = 1;
+}
