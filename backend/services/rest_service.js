@@ -5,7 +5,6 @@ var envType = process.env.NODE_ENV;
 
 var app = express()
 
-
 var port = process.env.PORT || 8080;
 
 //GRPC Stuff

@@ -21,5 +21,15 @@ spec:
         name: ms-ordnungsamt-backend
         ports:
         - containerPort: 8080
+      - image: mongo
+        name: ms-ordnungsamt-db
+        volumeMounts:
+          - mountPath: /data/db
+            name: db
       restartPolicy: Always
+      volumes:
+        - name: db
+          gcePersistentDisk:
+            pdName: ms-ordnungsamt
+            fsType: ext4
 status: {}
