@@ -14,21 +14,22 @@ var grpc_log = []
 const grpcAnnouncementService = caller(GRPC_BUERGERBUERO + GRPC_PORT, PROTO_PATH_ANNOUNCEMENT, 'AnnouncementService');
 const grpcUserService = caller(GRPC_BUERGERBUERO + GRPC_PORT, PROTO_PATH_USER, 'UserService');
 
-
-module.exports = function() {
-    function verifyUserGRPC(user_token) {
-        grpcClient.verifyUser({ token: user_token }, (err, res) => {
-            if (res.uid) {
-                //verfiy true
-                return res.uid;
-            } else {
-                //verfiy false
-                return false
-            }
-            grpc_log.push(err);
-        });    
-    }
-    function getLog() {
-        return JSON.stringify(grpc_log);
-    }
+var getLog = function() {
+    return JSON.stringify(grpc_log);
 };
+
+function verifyUserGRPC(user_token) {
+    grpcClient.verifyUser({ token: user_token }, (err, res) => {
+        if (res.uid) {
+            //verfiy true
+            return res.uid;
+        } else {
+            //verfiy false
+            return false
+        }
+        grpc_log.push(err);
+    });    
+};
+
+module.exports.getLog = getLog
+module.exports.verifyUserGRPC = verifyUserGRPC

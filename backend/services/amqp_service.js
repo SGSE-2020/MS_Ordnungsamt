@@ -1,5 +1,6 @@
 
 var amqp = require('amqp');
+var grpc_caller_service = require('./grpc_caller_service')
 
 const connectionObj = {
   host: 'ms-rabbitmq',
@@ -49,20 +50,20 @@ connection.on('ready', function () {
   });
 });
 
-
-module.exports  = function (grpc_caller_service) {
-  function sendMessage(data) {
-    exc.publish('', Buffer.from(JSON.stringify(data)), {
-      appId: 'Ordnungsamt',
-      timestamp: new Date().getTime(),
-      contentType: 'application/json',
-      type: ''
-    }, () => {
-      amqp_log.push("AMQP - Published message: " + JSON.stringify(data));
-    });
-  }
-
-  function getLog() {
-    return JSON.stringify(amqp_log);
-  }
+var sendMessage = function(data) {
+  exc.publish('', Buffer.from(JSON.stringify(data)), {
+    appId: 'Ordnungsamt',
+    timestamp: new Date().getTime(),
+    contentType: 'application/json',
+    type: ''
+  }, () => {
+    amqp_log.push("AMQP - Published message: " + JSON.stringify(data));
+  });
 };
+
+var getLog = function() {
+  return JSON.stringify(amqp_log);
+}
+
+module.exports.sendMessage = sendMessage;
+module.exports.getLog = getLog
