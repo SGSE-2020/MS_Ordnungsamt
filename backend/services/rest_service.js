@@ -47,7 +47,9 @@ app.get('/grpclog', function (req, res) {
 
 app.get('/verify', function (req, res) {
     console.log("REST CALL: /verify - Log Requested");
-    res.send(grpc_caller_service.verifyUserGRPC(req.body));
+    var auth_header = req.headers.authorization;
+
+    res.send(grpc_caller_service.verifyUserGRPC(auth_header));
 });
 
 app.get('/ordnungswidrigkeiten', function (req, res) {
