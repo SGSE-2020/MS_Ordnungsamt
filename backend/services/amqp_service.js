@@ -39,11 +39,11 @@ connection.on('ready', function () {
   });
   //Define queue to bind
   connection.queue(queue_ordnungsamt_parkplatz, queue => {
-    amqp_log.push("Queue" + queue_ordnungsamt_parkplatz + "created.");
+    amqp_log.push("Queue " + queue_ordnungsamt_parkplatz + " created.");
     queue.bind(exchange_parkplatz, queue_ordnungsamt_parkplatz, callback => {
       amqp_log.push("AMQP queue '" + queue.name + "' is bound to exchange: " + exchange_parkplatz + ".");
       queue.subscribe((msg) => {
-        amqp_log.push("Message incoming: " + msg);
+        amqp_log.push("Message incoming: " + JSON.stringify(msg));
       });
     });
   });
@@ -51,9 +51,15 @@ connection.on('ready', function () {
 
 
 module.exports  = {
-  sendMessage : (message) => {
-    console.log("Message published");
-    exc.publish('','Testmessageblblblb');
+  sendMessage : (data) => {
+    exc.publish('', Buffer.from(JSON.stringify(data)), {
+      appId: 'Ordnungsamt',
+      timestamp: new Date().getTime(),
+      contentType: 'application/json',
+      type: ''
+    }, () => {
+      amqp_log.push("AMQP - Published message: " + JSON.stringify(data));
+    });
   },
   lastError : () => {
     return amqp_log;
