@@ -25,6 +25,7 @@ function verifyUserGRPC(user_token) {
             return res.uid;
         } else {
             //verfiy false
+            grpc_log.push(res);
             return false
         }
         grpc_log.push(err);
