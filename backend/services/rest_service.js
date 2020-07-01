@@ -43,7 +43,7 @@ app.all('/*', function(req, res, next) {
 app.use(bodyParser);
     
 
-module.exports  = function(amqpservice,grpc_caller_service)  {
+module.exports  = function(amqpservice)  {
 /**
 * Returns if the rest server is alive
 */
@@ -65,13 +65,6 @@ app.get('/amqplog', function (req, res) {
 app.get('/grpclog', function (req, res) {
     console.log("REST CALL: /grpclog - Log Requested");
     res.send(grpc_log);
-});
-
-app.get('/verify', function (req, res) {
-    console.log("REST CALL: /verify - Log Requested");
-    var auth_header = req.headers.authorization;
-
-    res.send(grpc_caller_service.verifyUserGRPC(auth_header));
 });
 
 app.get('/ordnungswidrigkeiten', function (req, res) {
