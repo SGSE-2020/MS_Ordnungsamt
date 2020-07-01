@@ -50,8 +50,8 @@ connection.on('ready', function () {
 });
 
 
-module.exports  = {
-  sendMessage : (data) => {
+module.exports  = function (grpc_caller_service) {
+  function sendMessage(data) {
     exc.publish('', Buffer.from(JSON.stringify(data)), {
       appId: 'Ordnungsamt',
       timestamp: new Date().getTime(),
@@ -60,8 +60,9 @@ module.exports  = {
     }, () => {
       amqp_log.push("AMQP - Published message: " + JSON.stringify(data));
     });
-  },
-  getLog : () => {
+  }
+
+  function getLog() {
     return JSON.stringify(amqp_log);
   }
 };

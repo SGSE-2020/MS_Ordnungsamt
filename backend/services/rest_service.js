@@ -1,13 +1,9 @@
 var express = require('express')
-const caller = require('grpc-caller')
-const path = require('path');
+const bodyParser = require('body-parser');
+
 var app = express()
 
 var port = process.env.PORT || 8080;
-
-//Proto Files
-const PROTO_PATH_ANNOUNCEMENT = path.resolve(__dirname, '../proto/announcement.proto')
-const PROTO_PATH_USER = path.resolve(__dirname, '../proto/user.proto')
 
 
 //Tempo
@@ -21,9 +17,11 @@ app.all('/*', function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "*");
     next();
 });
+
+app.use(bodyParser);
     
 
-module.exports  = function(amqpservice,grpcservice)  {
+module.exports  = function(amqpservice,grpcservice,grpc_caller_service)  {
 /**
 * Returns if the rest server is alive
 */
@@ -38,8 +36,18 @@ app.get("/alive", function(req, res) {
 });
 
 app.get('/amqplog', function (req, res) {
-    console.log("REST CALL: /log - Log Requested");
+    console.log("REST CALL: /amqplog - Log Requested");
     res.send(amqpservice.getLog());
+});
+
+app.get('/grpclog', function (req, res) {
+    console.log("REST CALL: /grpclog - Log Requested");
+    res.send(grpc_caller_service.getLog());
+});
+
+app.get('/verify', function (req, res) {
+    console.log("REST CALL: /grpclog - Log Requested");
+    var state = grpc_caller_service.verifyUserGRPC(req.body);
 });
 
 app.get('/ordnungswidrigkeiten', function (req, res) {
