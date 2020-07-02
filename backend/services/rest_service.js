@@ -218,10 +218,11 @@ if(envType != "development"){
 
 app.get('/gnofuser', function (req, res) {
     console.log("REST CALL: /gnofuser");
-    var query = { name: eq.headers["X-User"]};
+    var query = { name: req.headers["X-User"]};
 
     dbservice.getDB().collection("ordnungswidrigkeiten").find(query).toArray(function(err, result) {
         if (err) rest_log.push(err)
+        rest_log.push(result)
         res.json(result);
       });
     
@@ -229,10 +230,11 @@ app.get('/gnofuser', function (req, res) {
 
 app.get('/anofuser', function (req, res) {
     console.log("REST CALL: /anofuser");
-    var query = { name: eq.headers["X-User"]};
+    var query = { name: req.headers["X-User"]};
 
     dbservice.getDB().collection("permissions").find(query).toArray(function(err, result) {
         if (err) rest_log.push(err)
+        rest_log.push(result)
         res.json(result);
       });
     
