@@ -12,7 +12,6 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
-      loading loading-text="Lädt... Bitte warten"
       :headers="headersan"
       :items="datasetan"
       :searchan="searchan"
@@ -30,7 +29,6 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
-      loading loading-text="Lädt... Bitte warten"
       :headers="headersow"
       :items="datasetow"
       :search="searchow"

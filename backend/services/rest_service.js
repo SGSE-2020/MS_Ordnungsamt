@@ -89,12 +89,48 @@ app.get('/dblog', function (req, res) {
 
 app.get('/ordnungswidrigkeiten', function (req, res) {
     console.log("REST CALL: /ordnungswidrigkeiten");
-    res.json({ow : [ "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++]});
+    var query = {state: "bearbeitet"}
+    dbservice.getDB().collection("ordnungswidrigkeiten").find(query).toArray(function(err, result) {
+        if (err) rest_log.push(err)
+        rest_log.push(result)
+        res.json(result);
+      });
+    //res.json({ow : [ "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++]});
 });
 
 app.get('/genehmigungen', function (req, res) {
     console.log("REST CALL: /genehmigungen");
-    res.json({gn : [ "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++]});
+    var query = {state: "bearbeitet"}
+    dbservice.getDB().collection("permissions").find(query).toArray(function(err, result) {
+        if (err) rest_log.push(err)
+        rest_log.push(result)
+        res.json(result);
+      });
+    //res.json({gn : [ "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++]});
+});
+
+app.get('/adddemodata', function (req, res) {
+    console.log("REST CALL: /adddemodata");
+    var query = {state: "bearbeitet"}
+    var db_obj = [
+        { name: 'ewfwefEewfwefwefOhpWN0uk8dC3', description: 'Peter hat einen Falschparker gesehen', type: 'Falschparker', state : 'bearbeitet'},
+        { name: 'd6nna3vat4znefwefOhpuk8dC3', description: 'Da hat jemand die Parkbank zerstört', type: 'Sachbeschädigung', state : 'bearbeitet'},
+        { name: 'drg436h62jttvk8dC3', description: 'Manni hat der Marie in den Bauch getreten', type: 'Körperverletzung', state : 'bearbeitet'},
+    ];
+    dbservice.getDB().collection('ordnungswidrigkeiten').insertOne(db_obj, function(err, res) {
+        if (err) db_log.push(err);
+    });
+    var db_obj2 = [
+        { name: 'ewfwewrjhihuvkvukhpWN0uk8dC3', description: 'Geburtstagsfeier(Corona)', state : 'bearbeitet'},
+        { name: 'd6nna3vat4znefwefOhpuk8dC3', description: 'Volksfest Kirche', state : 'bearbeitet'},
+        { name: 'dxhtxhtfxjzk8dC3', description: 'Jahrmarkt im Mai', state : 'bearbeitet'},
+        { name: 'drgmxctzxh535ttvk8dC3', description: 'Fest zu gunsten von Reisfarmern', state : 'unbearbeitet'},
+        { name: '5thy2jttvk8dC3', description: 'Flohmarkt am Kiesweg', state : 'unbearbeitet'},
+    ];
+    dbservice.getDB().collection('permissions').insertOne(db_obj2, function(err, res) {
+        if (err) db_log.push(err);
+    });
+
 });
 
 app.delete('/setupDB', function (req, res) {
@@ -286,7 +322,7 @@ app.post('/newOrdnungswidrigkeit', function (req, res){
 });
 
 app.post('/changeStateGenehmigung', function (req, res){
-    const data = req.body;
+    var data = req.body;
     var query = { _id : data.id};
     var newvalues = { $set: {state: "bearbeitet"}};
     dbservice.getDB().collection("permissions").updateOne(query, newvalues,function(err, res) {
@@ -298,8 +334,9 @@ app.post('/changeStateGenehmigung', function (req, res){
 });
 
 app.post('/changeStateOrdnungswidrigkeiten', function (req, res){
-    const data = req.body;
+    var data = req.body;
     var query = { _id : data.id};
+    rest_log.push(data.id);
     var newvalues = { $set: {state: "bearbeitet"}};
     dbservice.getDB().collection("ordnungswidrigkeiten").updateOne(query, newvalues,function(err, res) {
         if (err) rest_log.push(err);
