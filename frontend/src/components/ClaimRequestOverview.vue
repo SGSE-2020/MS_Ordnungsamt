@@ -82,30 +82,18 @@
     },
     methods:{
       loadGNData(){
-          axios.get('/api/gnofuser',{
-            headers: {
-              authorization: this.user.token
-            }
-          })
+          axios.get('/api/gnofuser')
           .then(response => {
-            this.datasetan = response.data;
+            this.datasetgn = response.data;
             console.log(response);
           })
       },
       loadANData(){
-        firebase.auth().currentUser.getIdToken(false).then(function(idToken){
-          axios.get('/api/anofuser',{
-            headers: {
-              authorization: idToken
-            }
-          })
+          axios.get('/api/anofuser')
           .then(response => {
             this.datasetan = response.data;
             console.log(response);
           })
-        }).catch(e => {
-          console.log(e);
-        })
       },
     },
     created() {

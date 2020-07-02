@@ -51,7 +51,7 @@ export default {
     axios.interceptors.request.use(
       async (config) => {
         var token = await auth.currentUser.getIdToken(true)
-        config.headers.Authorization = token
+        config.headers.Authorization = JSON.stringify(token);
         console.log(
           'Token added to request: ' + config.method + ' ' + config.url
         )
