@@ -265,7 +265,7 @@ app.post('/changeStateGenehmigung', function (req, res){
     const data = req.body;
     var query = { _id : data.id};
     var newvalues = { $set: {state: "bearbeitet"}};
-    dbo.collection("permissions").updateOne(query, newvalues,function(err, res) {
+    dbservice.getDB().collection("permissions").updateOne(query, newvalues,function(err, res) {
         if (err) rest_log.push(err);
         rest_log.push("1 genehmigung updated");
         res.status(200).send('ok');
@@ -277,7 +277,7 @@ app.post('/changeStateOrdnungswidrigkeiten', function (req, res){
     const data = req.body;
     var query = { _id : data.id};
     var newvalues = { $set: {state: "bearbeitet"}};
-    dbo.collection("ordnungswidrigkeiten").updateOne(query, newvalues,function(err, res) {
+    dbservice.getDB().collection("ordnungswidrigkeiten").updateOne(query, newvalues,function(err, res) {
         if (err) rest_log.push(err);
         rest_log.push("1 ordnungswidrigkeiten updated");
         res.status(200).send('ok');
