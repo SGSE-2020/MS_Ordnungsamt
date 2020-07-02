@@ -8,6 +8,8 @@ var app = express()
 
 var port = process.env.PORT || 8080;
 
+var rest_log = []
+
 //GRPC Stuff
 const caller = require('grpc-caller')
 const path = require('path');
@@ -69,6 +71,11 @@ app.get('/amqplog', function (req, res) {
 app.get('/grpclog', function (req, res) {
     console.log("REST CALL: /grpclog - Log Requested");
     res.send(grpc_log);
+});
+
+app.get('/restlog', function (req, res) {
+    console.log("REST CALL: /restlog - Log Requested");
+    res.send(rest_log);
 });
 
 app.get('/ordnungswidrigkeiten', function (req, res) {
@@ -136,6 +143,15 @@ if(envType != "development"){
     });
 }
 
+app.get('/workerdata', function (req, res) {
+    console.log("REST CALL: /workerdata");
+    
+    res.json({answer : "message sent"});
+});
+
+app.put('/newGenehmigung', function (req, res){
+    rest_log.push("newGenehmigung called: " + req.headers["X-User"]);
+});
 
 //Server start
 var server = app.listen(port, function() {
