@@ -12,7 +12,6 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
-      loading loading-text="Lädt... Bitte warten"
       :headers="headersan"
       :items="datasetan"
       :searchan="searchan"
@@ -30,7 +29,6 @@
       ></v-text-field>
     </v-card-title>
     <v-data-table
-      loading loading-text="Lädt... Bitte warten"
       :headers="headersow"
       :items="datasetow"
       :search="searchow"
@@ -42,7 +40,7 @@
 <script>
   import axios from 'axios';
   import { mapGetters } from "vuex";
-  
+
   export default {
     computed: {
     ...mapGetters({
@@ -98,6 +96,12 @@
     created() {
       this.loadGNData();
       this.loadANData();
+      this.interval = setInterval(() => this.loadGNData(), 5000)
+      this.interval2 = setInterval(() => this.loadANData(), 5000)
+    },
+    beforeDestroy() {
+      clearInterval(this.interval);
+      clearInterval(this.interval2);
     }
-  }
+  } 
 </script>

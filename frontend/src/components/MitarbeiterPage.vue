@@ -81,14 +81,14 @@
     },
     methods:{
       loadGNData(){
-          axios.get('/api/gnofuser')
+          axios.get('/api/gnofall')
           .then(response => {
             this.datasetow = response.data;
             console.log(response);
           })
       },
       loadANData(){
-          axios.get('/api/anofuser')
+          axios.get('/api/anofall')
           .then(response => {
             this.datasetan = response.data;
             console.log(response);
