@@ -188,6 +188,7 @@ if(envType != "development"){
                             req.headers["X-User"] = result.uid;
                             next();
                         } else {
+                            rest_log.push(result);
                             res.status(401).send({
                                 error: 'Invalid token!'
                             });
