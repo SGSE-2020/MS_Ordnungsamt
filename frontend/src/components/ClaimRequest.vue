@@ -87,7 +87,7 @@ export default {
           this.personOfInterest = '';
           this.ow_cat = [];
         },
-        submitOW() {
+        submitAN() {
           axios.post('/api/newGenehmigung', {
             name: this.headline,
             description: this.an_text,
@@ -100,9 +100,9 @@ export default {
           });
           this.clear();
         },
-        submitAN() {
-          axios.post('/newOrdnungswidrigkeit', {
-            name: this.personOfInteres,
+        submitOW() {
+          axios.post('/api/newOrdnungswidrigkeit', {
+            name: this.personOfInterest,
             description: this.ow_text,
             type: this.ow_cat,
             state: 'unbearbeitet'

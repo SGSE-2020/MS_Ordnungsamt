@@ -9,11 +9,11 @@
             </v-toolbar>
             <v-list dense>
                 <v-list-item
-                    v-for="(item, i) in owdata"
+                    v-for="(item, i) in owdata.ow"
                     :key="i"
                 >
                 <v-list-item-content>
-                    <v-list-item-title v-text="item.description"></v-list-item-title>
+                    <v-list-item-title v-text="item"></v-list-item-title>
                 </v-list-item-content>
                 </v-list-item>
             </v-list>

@@ -93,9 +93,9 @@ app.get('/ordnungswidrigkeiten', function (req, res) {
     dbservice.getDB().collection("ordnungswidrigkeiten").find(query).toArray(function(err, result) {
         if (err) rest_log.push(err)
         rest_log.push(result)
-        res.json(result);
+        //res.json(result);
       });
-    //res.json({ow : [ "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++]});
+    res.json({ow : [ 'Peter hat einen Falschparker gesehen' , 'Da hat jemand die Parkbank zerstört', 'Manni hat der Marie in den Bauch getreten']});
 });
 
 app.get('/genehmigungen', function (req, res) {
@@ -104,9 +104,9 @@ app.get('/genehmigungen', function (req, res) {
     dbservice.getDB().collection("permissions").find(query).toArray(function(err, result) {
         if (err) rest_log.push(err)
         rest_log.push(result)
-        res.json(result);
+        //res.json(result);
       });
-    //res.json({gn : [ "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++]});
+    res.json({gn : [ 'Geburtstagsfeier(Corona)' , 'Volksfest Kirche' , 'Jahrmarkt im Mai' , 'Fest zu gunsten von Reisfarmern']});
 });
 
 app.get('/adddemodata', function (req, res) {
@@ -130,7 +130,7 @@ app.get('/adddemodata', function (req, res) {
     dbservice.getDB().collection('permissions').insertOne(db_obj2, function(err, res) {
         if (err) db_log.push(err);
     });
-
+    res.status(200).send('ok');
 });
 
 app.delete('/setupDB', function (req, res) {
