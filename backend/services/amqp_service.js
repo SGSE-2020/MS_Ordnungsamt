@@ -2,6 +2,9 @@
 var amqp = require('amqp');
 var dbservice = require('./db_service');
 
+//Init DB connection
+dbservice.initialize();
+
 const connectionObj = {
   host: 'ms-rabbitmq',
   port: 5672,
@@ -45,6 +48,11 @@ connection.on('ready', function () {
       amqp_log.push("AMQP queue '" + queue.name + "' is bound to exchange: " + exchange_parkplatz + ".");
       queue.subscribe((msg) => {
         amqp_log.push("Message incoming: " + JSON.stringify(msg));
+        var db_obj = { name: msg.userId, description: msg.userNote, type: 'Falschparker', state : 'unbearbeitet'};
+        dbservice.getDB().collection('ordnungswidrigkeiten').insertOne(db_obj, function(err, res) {
+          if (err) throw err;
+          amqp_log.push("Eine Message in DB übertragen");
+        });
       });
     });
   });

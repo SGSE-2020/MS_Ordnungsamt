@@ -217,15 +217,25 @@ if(envType != "development"){
 }
 
 app.get('/gnofuser', function (req, res) {
-    console.log("REST CALL: /gnanofuser");
+    console.log("REST CALL: /gnofuser");
+    var query = { name: eq.headers["X-User"]};
+
+    dbservice.getDB().collection("ordnungswidrigkeiten").find(query).toArray(function(err, result) {
+        if (err) rest_log.push(err)
+        res.json(result);
+      });
     
-    res.json({answer : "message sent"});
 });
 
 app.get('/anofuser', function (req, res) {
-    console.log("REST CALL: /gnanofuser");
+    console.log("REST CALL: /anofuser");
+    var query = { name: eq.headers["X-User"]};
+
+    dbservice.getDB().collection("permissions").find(query).toArray(function(err, result) {
+        if (err) rest_log.push(err)
+        res.json(result);
+      });
     
-    res.json({answer : "message sent"});
 });
 
 app.put('/newGenehmigung', function (req, res){

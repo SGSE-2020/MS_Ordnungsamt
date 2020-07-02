@@ -42,8 +42,7 @@
 <script>
   import axios from 'axios';
   import { mapGetters } from "vuex";
-  import firebase from "firebase";
-
+  
   export default {
     computed: {
     ...mapGetters({
