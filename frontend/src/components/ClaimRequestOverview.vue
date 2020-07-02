@@ -20,8 +20,7 @@
     <br>
     <v-card-title>
       Bisherige Meldungen
-    </v-card-title>
-    <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
       <v-text-field
         v-model="searchow"
         append-icon="mdi-magnify"
@@ -29,6 +28,7 @@
         single-line
         hide-details
       ></v-text-field>
+    </v-card-title>
     <v-data-table
       loading loading-text="Lädt... Bitte warten"
       :headers="headersow"
@@ -82,20 +82,18 @@
     },
     methods:{
       loadGNData(){
-        axios.get('/api/gnofuser',{
-          headers: {
-            authorization: 'my secret token'
-          }
-        })
-        .then(response => {
-          this.datasetow = response.data
-        })
-        .catch(e => {
-          console.log(e);
-        })
+          axios.get('/api/gnofuser',{
+            headers: {
+              authorization: this.user.token
+            }
+          })
+          .then(response => {
+            this.datasetan = response.data;
+            console.log(response);
+          })
       },
       loadANData(){
-        firebase.currentUser.getIdToken(false).then(function(idToken){
+        firebase.auth().currentUser.getIdToken(false).then(function(idToken){
           axios.get('/api/anofuser',{
             headers: {
               authorization: idToken
@@ -105,9 +103,7 @@
             this.datasetan = response.data;
             console.log(response);
           })
-        })
-        
-        .catch(e => {
+        }).catch(e => {
           console.log(e);
         })
       },

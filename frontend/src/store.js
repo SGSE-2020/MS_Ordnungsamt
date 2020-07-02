@@ -6,7 +6,8 @@ export default new Vuex.Store({
     state: {
       user: {
         loggedIn: false,
-        data: null
+        data: null,
+        token: null
       }
     },
     getters: {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
       },
       SET_USER(state, data) {
         state.user.data = data;
+      },
+      SET_TOKEN(state,value) {
+        state.user.token = value;
       }
     },
     actions: {
@@ -33,6 +37,9 @@ export default new Vuex.Store({
         } else {
           commit("SET_USER", null);
         }
+      },
+      storeToken({commit}, token) {
+        commit("SET_TOKEN", token);
       }
     }
   });

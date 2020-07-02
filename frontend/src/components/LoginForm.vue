@@ -77,7 +77,8 @@
 
 //External Components
 import { mapGetters } from "vuex";
-import firebase from "firebase";
+//import firebase from "firebase";
+var auth = require('../firebase.js').auth
 
 export default {
   name: 'LoginForm',
@@ -96,9 +97,7 @@ export default {
   }),
   methods: {
       submit() {
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(this.email, this.password)
+        auth.signInWithEmailAndPassword(this.email, this.password)
             .then(data => {
                 this.showLoginForm = false;
                 console.log(data)
@@ -108,9 +107,7 @@ export default {
             });
       },
       signOut() {
-        firebase
-            .auth()
-            .signOut()
+        auth.signOut()
             .then(() => {
               this.$router.replace({
                 name: "publicpage"

@@ -32,6 +32,8 @@
 
 //Ordnungsamt Components
 import LoginForm from './components/LoginForm';
+import axios from 'axios';
+var auth = require('./firebase.js').auth
 
 
 export default {
@@ -43,6 +45,22 @@ export default {
 
   data: () => ({
     //
-  })
+  }),
+  mounted() {
+    // Add Authorization with access token
+    axios.interceptors.request.use(
+      async (config) => {
+        var token = await auth.currentUser.getIdToken(true)
+        config.headers.Authorization = token
+        console.log(
+          'Token added to request: ' + config.method + ' ' + config.url
+        )
+        return config
+      },
+      (error) => {
+        Promise.reject(error)
+      }
+    )
+  }
 };
 </script>
