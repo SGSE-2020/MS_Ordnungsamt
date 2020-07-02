@@ -28,7 +28,7 @@
                 label="Antragstext"
                 required
               ></v-text-field>
-              <v-btn class="mr-4" @click="submit">Antrag stellen</v-btn>
+              <v-btn class="mr-4" @click="submitAN">Antrag stellen</v-btn>
               <v-btn @click="clear">Zurücksetzen</v-btn>
               <v-spacer></v-spacer>
           </form>
@@ -57,7 +57,7 @@
                 label="Kategorien"
                 multiple
           ></v-select>
-              <v-btn class="mr-4" @click="submit">Ordnungswidrigkeit melden</v-btn>
+              <v-btn class="mr-4" @click="submitOW">Ordnungswidrigkeit melden</v-btn>
               <v-btn @click="clear">Zurücksetzen</v-btn>
               <v-spacer></v-spacer>
           </form>
@@ -80,9 +80,15 @@ export default {
     }),
     methods:{
         clear() {
+          this.headline = '';
+          this.an_text = '';
+          this.ow_text = '';
+          this.personOfInterest = '';
+        },
+        submitOW() {
 
         },
-        submit() {
+        submitAN() {
 
         }
     },

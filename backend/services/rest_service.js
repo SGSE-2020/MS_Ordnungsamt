@@ -9,10 +9,13 @@ var app = express()
 var port = process.env.PORT || 8080;
 
 var rest_log = []
+var db_log = []
+var grpc_log = []
 
 //GRPC Stuff
 const caller = require('grpc-caller')
 const path = require('path');
+const Collection = require('mongodb/lib/collection');
 
 //Other Settings
 const GRPC_BUERGERBUERO = 'ms-buergerbuero:';
@@ -23,8 +26,6 @@ const GRPC_PORT = 50051;
 const PROTO_PATH_ANNOUNCEMENT = path.resolve(__dirname, '../proto/announcement.proto');
 const PROTO_PATH_USER = path.resolve(__dirname, '../proto/user.proto');
 const PROTO_PATH_BANK = path.resolve(__dirname, '../proto/account.proto');
-
-var grpc_log = []
 
 const grpcBankService = caller(GRPC_BANK + GRPC_PORT, PROTO_PATH_BANK, 'AccountService');
 const grpcAnnouncementService = caller(GRPC_BUERGERBUERO + GRPC_PORT, PROTO_PATH_ANNOUNCEMENT, 'AnnouncementService');
@@ -47,7 +48,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-    
 
 module.exports  = function(amqpservice)  {
 /**
@@ -78,6 +78,11 @@ app.get('/restlog', function (req, res) {
     res.send(rest_log);
 });
 
+app.get('/dblog', function (req, res) {
+    console.log("REST CALL: /dblog - Log Requested");
+    res.send(db_log);
+});
+
 app.get('/ordnungswidrigkeiten', function (req, res) {
     console.log("REST CALL: /ordnungswidrigkeiten");
     res.json({ow : [ "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++ , "ordnungswidrigkeiten"+gn_count++]});
@@ -86,6 +91,71 @@ app.get('/ordnungswidrigkeiten', function (req, res) {
 app.get('/genehmigungen', function (req, res) {
     console.log("REST CALL: /genehmigungen");
     res.json({gn : [ "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++]});
+});
+
+app.delete('/resetdb', function (req, res) {
+    dbservice.getDB().collection("accounts").deleteMany({}, function(err,result){
+        if (err) {
+            db_log.push("error deleteing accounts");
+        } else {
+            db_log.push("success deleting accounts");
+            databaseService.getDB().collection("accounts").insertOne({
+                "_id": "4K2kEHYd9OWNL3TQOhpWN0uk8dC3",
+                "firstName": "Hans",
+                "lastName": "Ordnung",
+                "nickName": "Alman",
+                "email": "meister@lampe.de",
+                "birthDate": "11.9.2001"
+            }, function (err, result) {
+                if (err) {
+                    db_log.push("error readding init worker account")
+                } else {
+                    db_log.push("success readding init worker account")
+                }
+            });
+        }
+    });
+    databaseService.getDB().collection("roles").deleteMany({}, function (err, result) {
+        if (err) {
+            db_log.push("error deleteing roles")
+        } else {
+            db_log.push("success deleteing roles")
+
+            var data = {
+                "_id": '4K2kEHYd9OWNL3TQOhpWN0uk8dC3',
+                roles: ['user', 'worker']
+            }
+            databaseService.getDB().collection("roles").update({
+                "_id": data._id
+            }, data, {
+                upsert: true
+            }, function (err, result) {
+                if (err) {
+                    db_log.push("error readding init worker")
+                } else {
+                    db_log.push("success readding init worker")
+                }
+            });
+        }
+    });
+
+    databaseService.getDB().collection("permissions").deleteMany({}, function (err, result) {
+        if (err) {
+            db_log.push("error deleteing permissions")
+        } else {
+            db_log.push("success deleteing permissions")
+        }
+    });
+
+    databaseService.getDB().collection("ordnungswidrigkeiten").deleteMany({}, function (err, result) {
+        if (err) {
+            db_log.push("error deleteing ordnungswidrigkeiten")
+        } else {
+            db_log.push("success deleteing ordnungswidrigkeiten")
+        }
+    });
+
+    res.status(200).send('ok');
 });
 
 app.get('/announcePermission', function (req, res) {
