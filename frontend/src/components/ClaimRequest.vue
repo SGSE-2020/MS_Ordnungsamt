@@ -76,6 +76,7 @@ export default {
         an_text : '',
         ow_text : '',
         personOfInterest : '',
+        ow_cat : [],
         ow_all_cat: ['Öffentliches Ärgernis', 'Falschparken', 'Sachbeschädigung', 'Körperverletzung'],
     }),
     methods:{
@@ -84,6 +85,7 @@ export default {
           this.an_text = '';
           this.ow_text = '';
           this.personOfInterest = '';
+          this.ow_cat = [];
         },
         submitOW() {
 

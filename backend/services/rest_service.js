@@ -134,9 +134,9 @@ app.delete('/setupDB', function (req, res) {
                 upsert: true
             }, function (err, result) {
                 if (err) {
-                    db_log.push("error readding init worker")
+                    db_log.push("error readding oamt mitarbeiter")
                 } else {
-                    db_log.push("success readding init worker")
+                    db_log.push("success readding oamt mitarbeiter")
                 }
             });
         }
@@ -211,13 +211,19 @@ if(envType != "development"){
     app.use(function (req, res, next) {
         console.log(req.method + " " + req.url);
 
-        req.headers["X-User"] = "2WWhXXQsd1fC0a4SD16WjaI3hrq2";
+        req.headers["X-User"] = "4K2kEHYd9OWNL3TQOhpWN0uk8dC3";
         next();
     });
 }
 
-app.get('/workerdata', function (req, res) {
-    console.log("REST CALL: /workerdata");
+app.get('/gnofuser', function (req, res) {
+    console.log("REST CALL: /gnanofuser");
+    
+    res.json({answer : "message sent"});
+});
+
+app.get('/anofuser', function (req, res) {
+    console.log("REST CALL: /gnanofuser");
     
     res.json({answer : "message sent"});
 });
