@@ -2,6 +2,9 @@ var express = require('express')
 const bodyParser = require('body-parser');
 var dbservice = require('./db_service');
 
+//Init DB connection
+dbservice.initialize();
+
 var envType = process.env.NODE_ENV;
 
 var app = express()
@@ -93,13 +96,13 @@ app.get('/genehmigungen', function (req, res) {
     res.json({gn : [ "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++ , "genehmigungen"+ow_count++]});
 });
 
-app.delete('/resetdb', function (req, res) {
+app.delete('/setupDB', function (req, res) {
     dbservice.getDB().collection("accounts").deleteMany({}, function(err,result){
         if (err) {
             db_log.push("error deleteing accounts");
         } else {
             db_log.push("success deleting accounts");
-            databaseService.getDB().collection("accounts").insertOne({
+            dbservice.getDB().collection("accounts").insertOne({
                 "_id": "4K2kEHYd9OWNL3TQOhpWN0uk8dC3",
                 "firstName": "Hans",
                 "lastName": "Ordnung",
@@ -115,7 +118,7 @@ app.delete('/resetdb', function (req, res) {
             });
         }
     });
-    databaseService.getDB().collection("roles").deleteMany({}, function (err, result) {
+    dbservice.getDB().collection("roles").deleteMany({}, function (err, result) {
         if (err) {
             db_log.push("error deleteing roles")
         } else {
@@ -125,7 +128,7 @@ app.delete('/resetdb', function (req, res) {
                 "_id": '4K2kEHYd9OWNL3TQOhpWN0uk8dC3',
                 roles: ['user', 'worker']
             }
-            databaseService.getDB().collection("roles").update({
+            dbservice.getDB().collection("roles").update({
                 "_id": data._id
             }, data, {
                 upsert: true
@@ -139,7 +142,7 @@ app.delete('/resetdb', function (req, res) {
         }
     });
 
-    databaseService.getDB().collection("permissions").deleteMany({}, function (err, result) {
+    dbservice.getDB().collection("permissions").deleteMany({}, function (err, result) {
         if (err) {
             db_log.push("error deleteing permissions")
         } else {
@@ -147,7 +150,7 @@ app.delete('/resetdb', function (req, res) {
         }
     });
 
-    databaseService.getDB().collection("ordnungswidrigkeiten").deleteMany({}, function (err, result) {
+    dbservice.getDB().collection("ordnungswidrigkeiten").deleteMany({}, function (err, result) {
         if (err) {
             db_log.push("error deleteing ordnungswidrigkeiten")
         } else {
