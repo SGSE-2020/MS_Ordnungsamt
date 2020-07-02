@@ -69,7 +69,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
     data: () => ({
         headline : '',
@@ -88,10 +88,31 @@ export default {
           this.ow_cat = [];
         },
         submitOW() {
-
+          axios.post('/api/newGenehmigung', {
+            name: this.headline,
+            description: this.an_text,
+            state: 'unbearbeitet'
+          })
+          .then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
+          this.clear();
         },
         submitAN() {
-
+          axios.post('/newOrdnungswidrigkeit', {
+            name: this.personOfInteres,
+            description: this.ow_text,
+            type: this.ow_cat,
+            state: 'unbearbeitet'
+          })
+          .then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
+          this.clear();
         }
     },
 }
