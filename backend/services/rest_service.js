@@ -5,7 +5,8 @@ var dbservice = require('./db_service');
 //Init DB connection
 dbservice.initialize();
 
-var envType = process.env.NODE_ENV;
+//var envType = process.env.NODE_ENV;
+var envType = "development";
 
 var app = express()
 
@@ -190,7 +191,7 @@ if(envType != "development"){
                         } else {
                             rest_log.push(result);
                             res.status(401).send({
-                                error: 'Invalid token!'
+                               error: 'Invalid token!'
                             });
                         }
                     }).catch(err => {
